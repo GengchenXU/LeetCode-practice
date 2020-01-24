@@ -1,4 +1,5 @@
-### 题目描述
+ 题目描述
+ =============================
 给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
 请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
 
@@ -19,7 +20,8 @@ nums2 = [3, 4]
 
 ### 思路：先将两个数组合并求新数组的中位数
 
-### c++解法
+ c++解法
+================================================
 ```cpp
 class Solution {
 public:
@@ -63,7 +65,9 @@ public:
     }
 };
 ```
-### C语言解法
+C语言解法
+=========================================
+### ①
 ```c
 #include<stdio.h>
 int main()
@@ -95,3 +99,48 @@ int main()
     return 0;
 }
 ```
+### ②
+```c
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size){
+    int num[nums1Size + nums2Size];
+int i = 0, j = 0, k = 0;
+int sum;
+double a;
+while(i < nums1Size && j < nums2Size){
+    if(nums1[i] < nums2[j])
+    {
+        num[k] = nums1[i];
+        k++;
+        i++;
+    }
+    else
+    {
+        num[k] = nums2[j];
+        k++;
+        j++;
+    }
+}
+    while(i < nums1Size)
+    {
+        num[k] = nums1[i];
+        k++;
+        i++;
+    }
+    while(j < nums2Size)
+    {
+        num[k] = nums2[j];
+        k++;
+        j++;
+    }
+sum = (nums1Size + nums2Size) ;
+if((sum % 2) == 0)
+{
+    a = (num[sum / 2] + num[(sum / 2) - 1]) / 2.0;
+    return(a);
+}
+else
+{
+    return (num[sum / 2]);
+}
+}```
+

@@ -63,3 +63,35 @@ public:
     }
 };
 ```
+### C语言解法
+```c
+#include<stdio.h>
+int main()
+{
+    int nums1[100] = { 0 }, nums2[100] = { 0 }, s[200] = { 0 };
+    int m, n;
+    float x = 0;
+    scanf_s("%d %d", &m, &n);
+    for (int i = 0; i < m; i++) {
+        scanf_s("%d", &nums1[i]);
+        s[i] = nums1[i];
+    }
+    for (int i = 0; i < n; i++) {
+        scanf_s("%d", &nums2[i]);
+        s[m + i] = nums2[i];
+    }
+    for (int i = 0; i < (m + n); i++) {
+        if (s[i] > s[i + 1]) {
+            int temp = s[i];
+            s[i] = s[i + 1];
+            s[i + 1] = temp;
+        }
+    }
+    if ((m + n) % 2 == 0)
+        x = (float)(s[(m + n) / 2] + s[(m + n - 2) / 2]) / 2;
+    else
+        x = s[(m + n - 1) / 2];
+    printf("%.1f\n", x);
+    return 0;
+}
+```

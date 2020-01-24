@@ -31,6 +31,5 @@ int fib(int N){
         return 0;
     if(N== 1)
         return 1;
-    
     else return fib(N-1)+fib(N-2);
 }

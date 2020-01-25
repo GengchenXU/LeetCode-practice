@@ -4,7 +4,7 @@
 
 说明：你不能倾斜容器，且 n 的值至少为 2。
 
-![示例](https://github.com/GengchenXU/leetcode-practice/blob/master/question_11.jpg)
+![示例](https://github.com/GengchenXU/leetcode-practice/blob/master/question_11.jpg?raw=true)
 
 图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
 

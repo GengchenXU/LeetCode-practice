@@ -33,7 +33,7 @@ class Solution(object):
                 right -= 1
             
         return area
-        ```
+```
 ### C语言暴力解法
 ```c
 int maxArea(int* height, int heightSize){

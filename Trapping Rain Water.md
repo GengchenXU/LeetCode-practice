@@ -48,3 +48,97 @@ public:
     }
 };
 ````
+Java思路
+--------------------------
+水是向两边流的，最边上的柱子一定存不住水，但会限制一个高度，往中间走低的地方就能存住水了
+
+遍历找到最高点
+初始化容量数组，cap[i] = max - h[i] 假设都有水
+从两边往中间扫，记录一个当前最大值 lim, cap[i] = lim - h[i] 比最大值高的水都流走了
+对 cap 数组求和即可
+
+
+### 别人的JAVA做法
+```Java
+class Solution {
+    public int trap(int[] height) {
+           int max = 0;
+        int index = 0;
+        for(int i = 0; i < height.length; i++){
+            if(max < height[i]){
+                max = height[i];
+                index = i;
+            }
+        }
+        int[] cap = new int[height.length];
+        for(int i = 0; i < height.length; i++){
+            cap[i] = max - height[i];
+        }
+        int lim = 0;
+        for(int i = 0; i < index; i++){
+            if(height[i] > lim){
+                lim = height[i];
+                cap[i] = 0;
+            }else{
+                cap[i] = lim - height[i];
+            }
+        }
+        lim = 0;
+        for(int i = height.length - 1; i > index; i--){
+            if(height[i] > lim){
+                lim = height[i];
+                cap[i] = 0;
+            }else{
+                cap[i] = lim - height[i];
+            }
+        }
+        int ans = 0;
+        for(int i = 0; i < cap.length; i++){
+            ans += cap[i];
+        }
+        return ans;
+        
+    }
+}
+```
+### 根据Java的思路写的C 但是结果却不对
+```c
+int trap(int* height, int heightSize){
+    int max=0;
+    int index = 0;
+    int t=sizeof(height);
+    int cap[t];
+        for(int i=0;i<t;i++){
+            if(height[i]>max)
+            max=height[i];
+            index=i;
+        }
+       for(int i = 0; i < t; i++){
+            cap[i] = max - height[i];
+        }
+        int lim = 0;
+        for(int i = 0; i < index; i++){
+            if(height[i] > lim){
+                lim = height[i];
+                cap[i] = 0;
+            }else{
+                cap[i] = lim - height[i];
+            }
+        }
+        lim = 0;
+        for(int i = t - 1; i > index; i--){
+            if(height[i] > lim){
+                lim = height[i];
+                cap[i] = 0;
+            }else{
+                cap[i] = lim - height[i];
+            }
+        }
+        int ans = 0;
+        for(int i = 0; i <t; i++){
+            ans += cap[i];
+        }
+        return ans;
+    }
+```
+

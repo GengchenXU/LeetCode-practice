@@ -52,7 +52,7 @@ bool isSubsequence(char* s, char* t) {
 	}
 	end = start + 1;
     i++;//可以节约运行时间
-	while (i < sourceLen && end < targetLen) {
+	while ( end < targetLen) {
 		if (t[end] == s[i]) {
 			i++;
 		}

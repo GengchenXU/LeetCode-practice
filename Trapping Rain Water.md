@@ -104,16 +104,17 @@ class Solution {
 ### 根据Java的思路写的C 但是结果却不对
 ```c
 int trap(int* height, int heightSize){
+    if(heightSize==0)
+    return 0;
     int max=0;
     int index = 0;
-    int t=sizeof(height);
-    int cap[t];
-        for(int i=0;i<t;i++){
+    int cap[heightSize];
+        for(int i=0;i<heightSize;i++){
             if(height[i]>max)
             max=height[i];
             index=i;
         }
-       for(int i = 0; i < t; i++){
+       for(int i = 0; i < heightSize; i++){
             cap[i] = max - height[i];
         }
         int lim = 0;
@@ -126,7 +127,7 @@ int trap(int* height, int heightSize){
             }
         }
         lim = 0;
-        for(int i = t - 1; i > index; i--){
+        for(int i = heightSize - 1; i > index; i--){
             if(height[i] > lim){
                 lim = height[i];
                 cap[i] = 0;
@@ -135,10 +136,10 @@ int trap(int* height, int heightSize){
             }
         }
         int ans = 0;
-        for(int i = 0; i <t; i++){
+        for(int i = 0; i <heightSize; i++){
             ans += cap[i];
         }
-        return ans;
+    return ans;
     }
 ```
 

@@ -13,8 +13,10 @@
 
  示例 1：
 
-输入：	tomatoSlices = 16, cheeseSlices = 7
-输出：	[1,6]
+输入：	
+	tomatoSlices = 16, cheeseSlices = 7
+输出：	
+	[1,6]
 解释：制作 1 个巨无霸汉堡和 6 个小皇堡需要 4*1 + 2*6 = 16 片番茄和 1 + 6 = 7 片奶酪。不会剩下原料。
 
 

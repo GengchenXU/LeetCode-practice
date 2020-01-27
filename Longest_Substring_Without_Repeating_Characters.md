@@ -33,6 +33,7 @@ C语言解法
 ==================================
 ### ①
 ```c
+/*数组arr是为了记录每一个字母所对应的窗口位置
 int lengthOfLongestSubstring(char * s){
     int arr[128]={0},start=1,maxlen=0,i,end=1;//之所以start和end赋初值为1是为了防止空字符串，空字符串的最长子列为1
     for(i=0;s[i];i++){

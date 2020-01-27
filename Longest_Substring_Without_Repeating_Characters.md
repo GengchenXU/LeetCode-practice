@@ -42,7 +42,7 @@ int lengthOfLongestSubstring(char * s){
             if(end-start>maxlen)
                 maxlen=end-start;
             start=arr[s[i]]+1;
-            arr[s[i]]=end++;//遇到相同则把之前相同的移到右边，左边收缩
+            arr[s[i]]=end++;//遇到相同则把之前相同的移到右边，左边收缩，即滑动窗口
         }
     }
     if(end-start>maxlen) maxlen=end-start;

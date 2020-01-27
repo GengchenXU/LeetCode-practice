@@ -37,12 +37,12 @@ int lengthOfLongestSubstring(char * s){
     int arr[128]={0},start=1,maxlen=0,i,end=1;//之所以start和end赋初值为1是为了防止空字符串，空字符串的最长子列为1
     for(i=0;s[i];i++){
         if(arr[s[i]]<start)
-            arr[s[i]]=end++;
+            arr[s[i]]=end++;//遇到不同则拓展窗口
         else{
             if(end-start>maxlen)
                 maxlen=end-start;
             start=arr[s[i]]+1;
-            arr[s[i]]=end++;
+            arr[s[i]]=end++;//遇到相同则把之前相同的移到右边，左边收缩
         }
     }
     if(end-start>maxlen) maxlen=end-start;

@@ -1,1 +1,1 @@
-主要利用C/C++和python解决leetcode上的问题
+主要利用C/C++和python解决LeetCode上的问题

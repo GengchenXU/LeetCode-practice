@@ -95,6 +95,7 @@ bool isValid(char * s){
 ```
 ### ②计数器法
 ```c
+/*此方法对[(])类型无效
 bool isValid(char * ch){
     int count1=0;   //大括号{}
     int count2=0;   //中括号[] 

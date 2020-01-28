@@ -75,6 +75,7 @@ class Solution {
             cap[i] = max - height[i];
         }
         int lim = 0;
+
         for(int i = 0; i < index; i++){
             if(height[i] > lim){
                 lim = height[i];

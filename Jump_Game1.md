@@ -20,6 +20,14 @@
 C++解法
 =======================
 ### ①
+    - 初始化zeroCount为0，从右往左（从倒数第二个开始）遍历数组，
+        - 遇到0则zeroCount++；
+        - 否则判断nums[i]是否大于zeroCount；
+            - 若大于，则置zeroCount为0，继续遍历；
+            - 否则zeroCount++；
+    - 遍历结束后若zeroCount>0，说明nums中某个0不可避免，则返回false；
+    - 否则返回true。
+
 ```cpp
 class Solution {
 public:

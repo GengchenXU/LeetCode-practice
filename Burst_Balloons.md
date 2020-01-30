@@ -39,14 +39,13 @@ int maxCoins(int* nums, int numsSize)
             }
             int tmpMax = 0;
             for (int k = i + 1; k < j; k++) {
-                int l = dp[i][k] + dp[k][j] + tmpNums[i] * tmpNums[k] * tmpNums[j];/*反正就是穷举，先是3个  
+                int tmpMax = dp[i][k] + dp[k][j] + tmpNums[i] * tmpNums[k] * tmpNums[j];/*反正就是穷举，先是3个  
 		连续的挨个类似滑动窗口的乘积然后再len先空1个再2个。。。。。那样跳，k在中间移动来达到第一次中间某个  
 		气球被扎（依此类推）。dp[i][k]+dp[k][j]就是上一步的乘积。*/
-                if (l > tmpMax) {
-                    tmpMax = l;
+                if (tmpMax>dp[i][j]) {
+                    dp[i][j] =tmpMax ;
                 }
             }
-            dp[i][j] = tmpMax;
         }
     }
     return dp[0][numsSize + 1];

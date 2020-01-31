@@ -27,8 +27,7 @@ if (grid(i, j) == 1) {
 ----------------------
 若形成正方形（非单 1），以当前为右下角的视角看，则需要：当前格、上、左、左上都是 1
 可以换个角度：当前格、上、左、左上都不能受 0 的限制，才能成为正方形
-
-!(https://pic.leetcode-cn.com/8c4bf78cf6396c40291e40c25d34ef56bd524313c2aa863f3a20c1f004f32ab0-image.png)
+![示例](https://pic.leetcode-cn.com/8c4bf78cf6396c40291e40c25d34ef56bd524313c2aa863f3a20c1f004f32ab0-image.png)
 上面详解了 三者取最小 的含义：
 
 图1：受限于左上的0

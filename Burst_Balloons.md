@@ -48,6 +48,6 @@ int maxCoins(int* nums, int numsSize)
             }
         }
     }
-    return dp[0][numsSize + 1];
+    return dp[0][numsSize + 1];//之所以是0是因为到最后的时候只有i=0一次循环因为tmpMAX等于上一次循环的tmpmax
 }
 ```

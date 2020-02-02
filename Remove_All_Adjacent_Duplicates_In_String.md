@@ -25,7 +25,7 @@ write退1，否则压栈。
 
 C语言解法
 =======================
-```
+```c
 char * removeDuplicates(char * S){
     int write=0;
     int read=0;

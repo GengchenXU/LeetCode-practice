@@ -91,6 +91,31 @@
         return max;
     }
 ```    
+我们再封装一层方法，对空数组进行处理。因为 def( i , j ) 并不戳破两个边界的气球，我们为气球数组加上虚拟的边界：
+```java
+public static final int maxCoins4MS(int[] nums) {
+        //空数组处理
+        if (nums == null) {
+            return maxCoin;
+        }
+        //加虚拟边界
+        int length = nums.length;
+        int[] nums2=new int[length+2];
+        System.arraycopy(nums,0,nums2,1,length);
+        nums2[0]=1;
+        nums2[length+1]=1;
+        length=nums2.length;
+        //创建缓存数组
+        int[][] cache=new int[length][length];
+        //调用分治函数
+        return maxCoins4M(nums2, length,cache);
+    }
+
+    public static int maxCoins4M(int[] nums, int length,int[][] cache) {
+        int max = maxCoins4(nums, length, 0, length - 1,cache);
+        return max;
+    }
+```
 Ⅱ动态规划，状态转移方程
 ------------------------------------
 　动态规划

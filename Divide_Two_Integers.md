@@ -35,7 +35,7 @@ public:
             {
                 break;
             }
-			divisor += divisor;
+			divisor += divisor;//节省运算时间
 			times += times;
 		}
 

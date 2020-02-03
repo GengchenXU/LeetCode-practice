@@ -167,6 +167,29 @@ return dp[n - 1][max_k][0];
 输出: 3 
 解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]
 
+```c
+int max(int a,int b){return a>b?a:b;}
+int maxProfit(int* prices, int n){
+    int dp_i_0 = 0, dp_i_1 = INT_MIN;
+    int pre_0=0;//记录前天没有股票
+
+    for (int i = 0; i < n; i++) {
+        int temp = dp_i_0;//记录昨天没有股票
+        dp_i_0 = max(//今天没有股票
+            dp_i_0, //昨天有股票，今天继续持有
+            dp_i_1 + prices[i]//昨天有股票时进行卖出
+            );
+        
+        dp_i_1 = max(//今天有股票
+            dp_i_1, //昨天有股票，今天继续持有
+            pre_0 - prices[i]//前天没有股票，今天选择购买
+            );
+        pre_0=temp;
+    }
+    return dp_i_0;
+}
+```
+
 Ⅵ买卖股票的最佳时机含手续费
 ---------------------------------------
 给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；非负整数 fee 代表了交易股票的手续费用。

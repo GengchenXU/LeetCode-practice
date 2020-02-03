@@ -97,6 +97,7 @@ public:
 ```
 ### C
 ```c
+//*二进制数右移一位就是除2
 #define LIMIT 0x80000000
 
 static int divide(int dividend, int divisor) {

@@ -516,7 +516,7 @@ int maxProfit_k_2(int[] prices) {
 int maxProfit_k_any(int max_k, int[] prices) {
     int n = prices.length;
     if (max_k > n / 2) 
-        return maxProfit_k_inf(prices);
+        return Profit(prices);
 
     int[][][] dp = new int[n][max_k + 1][2];
     for (int i = 0; i < n; i++) 
@@ -527,10 +527,22 @@ int maxProfit_k_any(int max_k, int[] prices) {
                 dp[i][k][1] = -prices[i];
                 continue;
             }
-            dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
-            dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);     
+            dp[i][k][0] = Math.max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
+            dp[i][k][1] = Math.max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);     
         }
     return dp[n - 1][max_k][0];
+ private int Profit(int[] prices){
+           int dp_i_0 = 0;
+        int dp_i_1 = Integer.MIN_VALUE;
+        int tmp = 0;
+        for(int i =0;i<prices.length;i++){
+            tmp = dp_i_0;
+            dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+            dp_i_1 = Math.max(dp_i_1, tmp-prices[i]);
+            tmp = dp_i_0;
+        }
+        return dp_i_0;
+     }
 }
 ```
 至此，6 道题目通过一个状态转移方程全部解决。  

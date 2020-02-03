@@ -193,6 +193,23 @@ return dp[n - 1][max_k][0];
 	0 < prices[i] < 50000.
 	0 <= fee < 50000.
 	
+```Java	
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        int res=0;
+        int price=Integer.MAX_VALUE;
+        for (int n:prices){
+            if (n<price) price=n;
+            else if (n>price+fee) 
+            {res+=n-fee-price;
+            price=n-fee;
+
+            }
+    }
+    return res;
+    }
+}	
+```	
 **********************************************
 
 ### 一、穷举框架

@@ -102,3 +102,16 @@ int carFleet(int target, int* position, int positionSize, int* speed, int speedS
     return fleetNum;
 }
 ```
+　功能： 使用快速排序例程进行排序
+　　头文件：stdlib.h
+　　用法：  void qsort(void* base,size_t
+ num,size_t width,int(__cdecl*compare)(const void*,const void*)); 
+　　参数： 1 待排序数组，排序之后的结果仍放在这个数组中
+　　　　　 2 数组中待排序元素数量
+　　　　    3 各元素的占用空间大小（单位为字节）
+　　           4 指向函数的指针，用于确定排序的顺序（需要用户自定义一个比较函数）
+
+ 　qsort要求提供一个自己定义的比较函数。比较函数使得qsort通用性更好，有了比较函数qsort可以实现对数组、字符串、结构体等结构进行升序或降序排序。
+
+如比较函数 int cmp(const void *a, const void *b) 中有两个元素作为参数（参数的格式不能变），返回一个int值，比较函数cmp的作用就是给qsort指明元素的大小是怎么比较的。
+

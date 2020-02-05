@@ -30,6 +30,15 @@ C语言解法
 bool stoneGame(int* piles, int n){
         int dps[n][n];
         //dps[i][i]存储当前i的石子数
+	 //dp其实就是存储了递归过程中的数值
+        //dps[i][j]代表从i到j所能获得的最大的绝对分数
+        //（比如为1就说明亚历克斯从i到j可以赢李1分）
+        //如何计算dps[i][j]呢:max(piles[i]-dp[i+1][j],piles[j]-dp[i][j-1]);
+        //这里减去dps数组是因为李也要找到最大的
+        //最后dps=[5 2 4 1]
+        //        [0 3 1 4]
+        //        [0 0 4 1]
+        //        [0 0 0 5]
         for(int i=0;i<n;i++)
             dps[i][i]=piles[i];
         //d=1,其实代表，先算两个子的时候

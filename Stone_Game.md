@@ -52,8 +52,7 @@ bool stoneGame(int* piles, int n){
             }
         }
         return dps[0][n-1]>0;
-            return true;
-}
+  }
 ```
 ### 优化
 ```c
@@ -68,7 +67,6 @@ bool stoneGame(int* piles, int n){
         for(int i=0;i<n-l+1;i++)
             dp[i] = fmax(piles[i]-dp[i+1],piles[i+l-1]-dp[i]);
         return dp[0]>0;
-            return true;
 }
 ```
 ### 当然这道题出的很傻逼，先手肯定赢。

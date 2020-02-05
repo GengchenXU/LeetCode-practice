@@ -79,11 +79,11 @@ dp[i][j].sec = 0
 # 后手没有石头拿了，得分为 0
 ``` 
 
-![](https://pic.leetcode-cn.com/4130c179b1539ca8f79cf11d060dcece59d6da8d1199330f0c4086f14e4b55c2-file_1564377204078)  
+![1](https://pic.leetcode-cn.com/4130c179b1539ca8f79cf11d060dcece59d6da8d1199330f0c4086f14e4b55c2-file_1564377204078)  
 这里需要注意一点，我们发现 basecase是斜着的，而且我们推算 dp[i][j] 时需要用到 dp[i+1][j] 和 dp[i][j-1]  
-![](https://pic.leetcode-cn.com/f59bdc232e1be821fbcabc6640e9775bef5b4cbd0b2c653edc6e0db2c3d7440b-file_1564377204079) 
+![2](https://pic.leetcode-cn.com/f59bdc232e1be821fbcabc6640e9775bef5b4cbd0b2c653edc6e0db2c3d7440b-file_1564377204079)   
 所以说算法不能简单的一行一行遍历 dp 数组，而要斜着遍历数组：  
-![](https://pic.leetcode-cn.com/3b1adc86ba35fb78111ee6e1b6c38d7adac2f7da4169fbb076672d0351150c50-file_1564377204083)
+![3](https://pic.leetcode-cn.com/3b1adc86ba35fb78111ee6e1b6c38d7adac2f7da4169fbb076672d0351150c50-file_1564377204083)
 
 C语言解法
 ==========================

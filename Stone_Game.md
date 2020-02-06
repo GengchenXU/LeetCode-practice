@@ -85,7 +85,7 @@ dp[i][j].sec = 0
 所以说算法不能简单的一行一行遍历 dp 数组，而要斜着遍历数组：  
 ![3](https://pic.leetcode-cn.com/3b1adc86ba35fb78111ee6e1b6c38d7adac2f7da4169fbb076672d0351150c50-file_1564377204083)
 
-C语言解法
+解法
 ==========================
 ```c
 bool stoneGame(int* piles, int N){
@@ -107,6 +107,24 @@ bool stoneGame(int* piles, int N){
 
         return dp[1][N] > 0;
   }
+```
+```java
+class Solution {
+    public boolean stoneGame(int[] piles) {
+        //dp[i][j]为i开始到j结束alex能赢li多少分 alex先拿的话
+        //dp[i][j] = max(piles[i]-dp[i+1][j],piles[j]-dp[i][j-1])
+        int[][] dp = new int[piles.length][piles.length];
+        for(int i = 0; i < piles.length; i++){
+            dp[i][i] = piles[i];
+        }
+        for(int i = 1; i < piles.length; i++){
+            for(int j = 0; j < piles.length - i; j++){
+                dp[j][j + i] = Math.max(piles[j] - dp[j + 1][j + i], piles[j + i] - dp[j][j + i - 1]);
+            }
+        }
+        return dp[0][piles.length - 1] > 0;
+    }
+}
 ```
 ### 优化
 ```c

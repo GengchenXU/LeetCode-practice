@@ -117,6 +117,13 @@ class Solution {
         for(int i = 0; i < piles.length; i++){
             dp[i][i] = piles[i];
         }
+	/**当集合中元素大于2时，先选的人从序列两头拿，可以分成两种情况
+        *以ABC为例，可以拿A，剩余BC，后手会选择BC的最佳拿取方式，
+        *所以先手得分为A-BC得分，即：results[i][j]=piles[i]-results[i+1][j]；
+        *也可以拿C，剩余AB，同理有results[i][j]=piles[j]-results[i][j-1]；
+        *选择分值较大的那个即可。上面两个式子都要求我们在求results[i][j]的时候知道
+        *它的下面和左边一个格子的值，所以我们从下到上，从左到右计算填表。
+        */
         for(int i = 1; i < piles.length; i++){
             for(int j = 0; j < piles.length - i; j++){
                 dp[j][j + i] = Math.max(piles[j] - dp[j + 1][j + i], piles[j + i] - dp[j][j + i - 1]);

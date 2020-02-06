@@ -88,31 +88,24 @@ dp[i][j].sec = 0
 C语言解法
 ==========================
 ```c
-bool stoneGame(int* piles, int n){
-        int dps[n][n];
-        //dps[i][i]存储当前i的石子数
-	 //dp其实就是存储了递归过程中的数值
-        //dps[i][j]代表从i到j所能获得的最大的绝对分数
-        //（比如为1就说明亚历克斯从i到j可以赢李1分）
-        //如何计算dps[i][j]呢:max(piles[i]-dp[i+1][j],piles[j]-dp[i][j-1]);
-        //这里减去dps数组是因为李也要找到最大的
-        //最后dps=[5 2 4 1]
-        //        [0 3 1 4]
-        //        [0 0 4 1]
-        //        [0 0 0 5]
-        for(int i=0;i<n;i++)
-            dps[i][i]=piles[i];
-        //d=1,其实代表，先算两个子的时候
-        for(int d=1;d<n;d++)
-        {
-            //有多少组要比较
-            for(int j=0;j<n-d;j++)
-            {
-                //比较j到d+j
-                dps[j][d+j]=fmax(piles[j]-dps[j+1][d+j],piles[d+j]-dps[j][d+j-1]);
+bool stoneGame(int* piles, int N){
+        int dp[N+2][N+2];
+        memset(dp, 0, sizeof(dp));
+        for (int size = 1; size <= N; ++size)
+            for (int i = 0, j = size - 1; j < N; ++i, ++j) {
+/*当剩下的堆的石子数是 piles[i], piles[i+1], ..., piles[j] 时，轮到的玩家最多有 2 种行为。可以通过比较 j-i和 N modulo 2 来找出轮到
+的人。如果玩家是亚历克斯，那么她将取走 piles[i] 或 piles[j] 颗石子，增加她的分数。之后，总分为 piles[i] + dp(i+1, j) 或 piles[j] + dp(i, j-
+1)；我们想要其中的最大可能得分。如果玩家是李，那么他将取走 piles[i] 或 piles[j] 颗石子，减少亚历克斯这一数量的分数。
+之后，总分为 -piles[i] + dp(i+1, j) 或 -piles[j] + dp(i, j-1)；我们想要其中的最小可能得分。*/
+
+                int parity = (j + i + N) % 2;  // j - i - N; but +x = -x (mod 2)
+                if (parity == 1)
+                    dp[i+1][j+1] = max(piles[i] + dp[i+2][j+1], piles[j] + dp[i+1][j]);
+                else
+                    dp[i+1][j+1] = min(-piles[i] + dp[i+2][j+1], -piles[j] + dp[i+1][j]);
             }
-        }
-        return dps[0][n-1]>0;
+
+        return dp[1][N] > 0;
   }
 ```
 ### 优化

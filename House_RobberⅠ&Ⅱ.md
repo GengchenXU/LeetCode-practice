@@ -47,7 +47,7 @@
 当你走过了最后一间房子后，你就没得抢了，能抢到的钱显然是 0（base case）。
 
 以上的逻辑很简单吧，其实已经明确了「状态」和「选择」：你面前房子的索引就是状态，抢和不抢就是选择。
-![](https://pic.leetcode-cn.com/92c830194e9ce50fafd5fcce29eab57b915e642ec29f42e07b27683d61ddf0b5-file_1578115994454)
+![1](https://pic.leetcode-cn.com/92c830194e9ce50fafd5fcce29eab57b915e642ec29f42e07b27683d61ddf0b5-file_1578115994454)
 
 在两个选择中，每次都选更大的结果，最后得到的就是最多能抢到的 money：
 ```java
@@ -72,7 +72,7 @@ private int dp(int[] nums, int start) {
 ```
 明确了状态转移，就可以发现对于同一 start 位置，是存在重叠子问题的，比如下图：
 
-![](https://pic.leetcode-cn.com/89e5ceb51ffc7639506789b3aff9157d434fb4618a0ce59e7bed2028d5985b78-file_1578115994471)
+![2](https://pic.leetcode-cn.com/89e5ceb51ffc7639506789b3aff9157d434fb4618a0ce59e7bed2028d5985b78-file_1578115994471)
 盗贼有多种选择可以走到这个位置，如果每次到这都进入递归，岂不是浪费时间？所以说存在重叠子问题，可以用备忘录进行优化：
 ```java
 private int[] memo;
@@ -140,7 +140,7 @@ House Robber II
 这个约束条件看起来应该不难解决，我们前文「单调栈解决 Next Greater Number」说过一种解决环形数组的方案，那么在这个问题上怎么处理呢？
 
 首先，首尾房间不能同时被抢，那么只可能有三种不同情况：要么都不被抢；要么第一间房子被抢最后一间不抢；要么最后一间房子被抢第一间不抢。
-![](https://pic.leetcode-cn.com/40955db0ce08289191aca14b5143d7b370079249ad416260b5b525a918839dc3-file_1578115994473)  
+![3](https://pic.leetcode-cn.com/40955db0ce08289191aca14b5143d7b370079249ad416260b5b525a918839dc3-file_1578115994473)  
 那就简单了啊，这三种情况，那种的结果最大，就是最终答案呗！不过，其实我们不需要比较三种情况，只要比较情况二和情况三就行了，因为这两种情况对于房子的选择余地比情况一大呀，房子里的钱数都是非负数，所以选择余地大，最优决策结果肯定不会小。
 
 所以只需对之前的解法稍作修改即可：
@@ -151,9 +151,7 @@ public int rob(int[] nums) {
     return Math.max(robRange(nums, 0, n - 2), 
                     robRange(nums, 1, n - 1));
 }
-```
 // 仅计算闭区间 [start,end] 的最优结果
-```java
 int robRange(int[] nums, int start, int end) {
     int n = nums.length;
     int dp_i_1 = 0, dp_i_2 = 0;

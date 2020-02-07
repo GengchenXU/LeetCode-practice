@@ -2,7 +2,7 @@
 ==============================
 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 
-![示例](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png)
+![1](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png)
 
 
 上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。
@@ -26,9 +26,8 @@
 ### 一、核心思路
 我第一次看到这个问题，无计可施，完全没有思路，相信很多朋友跟我一样。所以对于这种问题，我们不要想整体，而应该去想局部；就像之前的文章处理字符串问题，不要考虑如何处理整个字符串，而是去思考应该如何处理每一个字符。
 
-这么一想，可以发现这道题的思路其实很简单。具体来说，仅仅对于位置 i，能装下多少水呢？
-!(https://pic.leetcode-cn.com/7c5c8f0dc7c32c07fbe1dbcfff9e4d5a69450b1817621f5975e28270ef11f739-file_1577197165936)
-
+这么一想，可以发现这道题的思路其实很简单。具体来说，仅仅对于位置 i，能装下多少水呢？  
+![2](https://pic.leetcode-cn.com/7c5c8f0dc7c32c07fbe1dbcfff9e4d5a69450b1817621f5975e28270ef11f739-file_1577197165936)
 能装 2 格水。为什么恰好是两格水呢？因为 height[i] 的高度为 0，而这里最多能盛 2 格水，2-0=2。
 为什么位置 i 最多能盛 2 格水呢？因为，位置 i 能达到的水柱高度和其左边的最高柱子、右边的最高柱子有
 关，我们分别称这两个柱子高度为 l_max 和 r_max；位置 i 最大的水柱高度就是 min(l_max, r_max)。
@@ -41,8 +40,8 @@ water[i] = min(
                max(height[i..end]) 
             ) - height[i]
 ```    
-!(https://pic.leetcode-cn.com/50707a5def56a85c91855ea75e60291a6b73c4df8873dc3e63c554a6bdd0b8c1-file_1577197165937)
-!(https://pic.leetcode-cn.com/64624dd22776dcc337a4733144089bf53a6e2a62426a680f606bb44633f471be-file_1577197165938)
+![3](https://pic.leetcode-cn.com/50707a5def56a85c91855ea75e60291a6b73c4df8873dc3e63c554a6bdd0b8c1-file_1577197165937)
+![4](https://pic.leetcode-cn.com/64624dd22776dcc337a4733144089bf53a6e2a62426a680f606bb44633f471be-file_1577197165938)
 
 这就是本问题的核心思路，我们可以简单写一个暴力算法：
 ```cpp
@@ -154,7 +153,7 @@ int trap(vector<int>& height) {
 ```
 ans += min(l_max[i], r_max[i]) - height[i];
 ```
-!(https://pic.leetcode-cn.com/2f8e64f19c265e51ed0a2311d43ec2dc32cb7a8c0b0882a22a9a4d0fdb478ea6-file_1577197165939)
+![5](https://pic.leetcode-cn.com/2f8e64f19c265e51ed0a2311d43ec2dc32cb7a8c0b0882a22a9a4d0fdb478ea6-file_1577197165939)
 但是双指针解法中，l_max 和 r_max 代表的是 height[0..left] 和 height[right..end] 的最高柱子高
 度。比如这段代码：
 ```
@@ -163,12 +162,12 @@ if (l_max < r_max) {
     left++; 
 } 
 ```
-!(https://pic.leetcode-cn.com/6ce2aa8a1324b0821a10eb90d9c28505c79d2da755c010e0eed2faf741f6dbcc-file_1577197165941)
+![6](https://pic.leetcode-cn.com/6ce2aa8a1324b0821a10eb90d9c28505c79d2da755c010e0eed2faf741f6dbcc-file_1577197165941)
 此时的 l_max 是 left 指针左边的最高柱子，但是 r_max 并不一定是 left 指针右边最高的柱子，这真的
 可以得到正确答案吗？
 
 其实这个问题要这么思考，我们只在乎 min(l_max, r_max)。对于上图的情况，我们已经知道 l_max < r_max 了，至于这个 r_max 是不是右边最大的，不重要，重要的是 height[i] 能够装的水只和 l_max 有关。
-!(https://pic.leetcode-cn.com/621e73dc73aa3fade606be25feb16c4886e3f35797906fdb3ca683702a187a82-file_1577197165942)
+![7](https://pic.leetcode-cn.com/621e73dc73aa3fade606be25feb16c4886e3f35797906fdb3ca683702a187a82-file_1577197165942)
 
 解法
 =============================

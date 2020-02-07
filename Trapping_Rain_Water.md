@@ -210,7 +210,7 @@ Java思路
 ```Java
 class Solution {
     public int trap(int[] height) {
-           int max = 0;
+        int max = 0;
         int index = 0;
         for(int i = 0; i < height.length; i++){
             if(max < height[i]){

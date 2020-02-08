@@ -185,6 +185,12 @@ class Solution(object):
                 else:
                     dp[i][j] = (i > 0 and p[j - 1] in{'.', s[i - 1]} and dp[i -1][j - 1])
                  return dp[m][n]
-```		 
+```
+## 正则表达式
+```python
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        return True if re.compile(p).fullmatch(s) else False
+```	
 
 

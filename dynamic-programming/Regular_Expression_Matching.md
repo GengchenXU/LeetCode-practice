@@ -46,7 +46,7 @@ s = "mississippi"
 p = "mis*is*p*."
 输出: false
 
-递归
+### 递归
 首先是递归基：p如果为空 如果s是空返回true 否则返回false  
 接着分情况讨论：
 1.p长度大于1 且p的第二个字母是`*`, 代表0次或更多前面的字母，首先考虑0次，即可以将p的前面两个字母抹去不考虑，即递归匹配`isMatch(s, p.substr(2))` 
@@ -68,3 +68,54 @@ public:
     }
 };
 ```
+# java：
+注意java是isEmpty()不是empty()
+```java
+class Solution {
+    public boolean isMatch(String s, String p) {
+        if(p.isEmpty()) return s.isEmpty();
+        if(p.length() > 1 && p.charAt(1) == '*'){
+            return isMatch(s, p.substring(2)) || 
+                !s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1),p);
+        } else {
+            return !s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1),p.substring(1));
+        }
+    }
+    
+}
+```
+# Python：
+
+not的用法python中not的用法
+p[0] in {s[0], ‘.’}等价于(s[0] == p[0] || p[0] == ‘.’)
+bool(s)来判断非空 在python中bool函数的取值方法
+```python
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        if not p:
+            return not s
+        first_match = bool(s) and p[0] in {s[0], '.'}
+        if len(p) > 1 and p[1] == '*':
+            return (self.isMatch(s, p[2:])) or first_match and self.isMatch(s[1:], p)
+        else:
+            return first_match and self.isMatch(s[1:], p[1:])
+ ```           
+   
+### 方法2：动态规划
+定义一个二维的DP数组，其中dp[i][j]表示s[0,i)和p[0,j)是否match，然后有下面三种情况
+
+P[i][j] = P[i - 1][j - 1], if p[j - 1] != ‘*’ && (s[i - 1] == p[j - 1] || p[j - 1] == ‘.’);
+P[i][j] = P[i][j - 2], if p[j - 1] == ‘*’ and the pattern repeats for 0 times;
+P[i][j] = P[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == ‘.’), if p[j - 1] == ‘*’ and the pattern repeats for at least 1 times.
+c++:
+注意&&的优先级高于|| 必要时加括号
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+

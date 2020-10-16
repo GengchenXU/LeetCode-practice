@@ -98,19 +98,6 @@ int main() {
 ```
 ### ②
 ```c
-int main() {
-    scanf("%d%d", &n, &m);
-    memset(gra, 0, sizeof(gra));
-    memset(cnt, 0, sizeof(cnt));
-    while (m--) {
-        int a, b;
-        scanf("%d%d", &a, &b);
-        gra[a][b] = gra[b][a] = 1;//认识的位置为1，之所以要反过来一次是为了分配第二个人时也要检验
-    }
-    solve(1, 0);
-    printf("%d\n", res);
-    return 0;
-}
 #include <stdio.h>
 #include <string.h>
 int n, min_kes, p[102][102], map[102][102];
